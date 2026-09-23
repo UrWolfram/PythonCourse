@@ -73,4 +73,71 @@ plt.show()
 - SQL remains the most consistently demanded skill thoughout the year, altough it shows a gradual decrease in demand
 - excel experienced a significant increase in demand starting around september, surpassing both python and Tableau by the end of the year
 
-## 3.
+## 3. How well do jobs and skills pay for Data Analysts?
+
+### Salary Analysis for Data Jobs
+
+#### Visualize Data
+
+````python
+sns.boxplot(data=df_US_top6, x="salary_year_avg", y="job_title_short", order=job_ordered)
+
+ticks_x = plt.FuncFormatter(lambda y, pos: f"${int(y/1000)}K")
+plt.gca().xaxis.set_major_formatter(ticks_x)
+plt.show()
+````
+
+#### Results
+
+![Salary Distribution of Data Jobs in the US](3_project\images\median_salary_per_role.png)
+
+#### Insights
+
+- There is a significant variation in salarys ranges across different job titles. Senior Data Scientists roles show a considerable number of outliners on the high end of salary spectrum, suggesting that exceptional skills or circumstances can lead to high pay in these roles
+- The median salaries increase with the seniority and specialization of the roles.
+
+#### Visualize Data:
+
+````python
+# Top 10 Hoghest Paid SKills for Data Analysts
+sns.barplot(data=df_DA_top_pay, x="median", y=df_DA_top_pay.index, ax=ax[0], hue="median", palette="dark:b_r")
+
+# Top 10 Most In-Demand Skills for Data Analysts
+sns.barplot(data=df_DA_skills, x="median", y=df_DA_skills.index, ax=ax[1], hue="median", palette="light:b")
+
+plt.show()
+````
+#### Results:
+
+![The Highest Paif & Most In-Demand Skills for Data Analysts in the US](3_project\images\highest_paid_vs_most_demand.png)
+
+#### Insights:
+
+- High Pay for Niche & Specialized Skills: The highest-paying skills (led by dplyr, bitbucket, gitlab, and solidity) command median salaries between $150K and $195K, reflecting high compensation for specialized engineering, DevOps, blockchain, and advanced analytics tools.
+
+- Core Analytics Skills Drive High Demand: The most demanded skills focus heavily on foundational data tools like python, tableau, r, sql, and power bi.
+
+- Salary Trade-Off (Demand vs. Pay): Most in-demand skills yield lower median salaries (~$80K to $98K) compared to niche tools, as widespread market supply stabilizes compensation for core analyst tools.
+
+## 4. What is the most optimal skill to learn for Data Analysts?
+
+### Visualize Data
+
+````python
+df_DA_skills_high_demand.plot(kind="scatter", x="skill_percent", y="median_salary", figsize=(8, 6))
+````
+
+![Most Optimal Skills for Data AAnalysts in the US](3_project\images\most_optimal_skills.png)
+*A scatter plot visualizing the most optimal skills for data analysts in the US.*
+
+#### Insights:
+
+- High Demand vs. High Salary Sweet Spot: Python and Tableau occupy the optimal top-right quadrant, combining high demand (featured in over 30% of job postings) with above-average median salaries ($93K–$97.5K).
+
+- Essential Baseline Skill: SQL is by far the most in-demand skill (found in nearly 60% of job ads), while offering a solid median salary around $91K.
+
+- High-Paying Niche Skills: Specialized technologies like Oracle, SQL Server, and Go command high salaries ($90K–$97K), but appear in fewer than 10% of job listings.
+
+- Lower Premium for Standard Office Tools: Foundational tools like Excel maintain high market presence (~41%) but yield lower median compensation ($84.4K). Word and PowerPoint trail at the bottom in both demand and salary.
+
+- Balanced Mid-Range Options: Power BI, SAS, and R cluster closely around 20% job demand and $90K–$92.5K median salaries, serving as balanced, high-value core skills.
